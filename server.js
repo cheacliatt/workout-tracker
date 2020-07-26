@@ -2,7 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const WorkoutController = require("./controllers/workoutController");
-const ExcerciseController = require("./controllers/excerciseController");
+const ExerciseController = require("./controllers/exerciseController");
+const HTMLController = require("./controllers/htmlController");
 
 const PORT = process.env.PORT || 8080;
 
@@ -31,10 +32,11 @@ app.get("/api/config", (req, res) => {
   });
 });
 
-
-
 app.use(WorkoutController);
-app.use(ExcerciseController);
+app.use(ExerciseController);
+// app.use(HTMLController);
+
+require("./controllers/htmlController")(app);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
