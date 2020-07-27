@@ -4,14 +4,6 @@ const db = require("../models");
 
 router.get("/api/workouts", (req, res) => {
   db.Workout.find({})
-    // .populate("ingredients")
-    .populate({
-      path: "exercises", // populate with user collection
-      options: {
-        limit: null, // query string or null
-        skip: null, // query string or null
-      },
-    })
     .then((foundWorkouts) => {
       res.json({
         error: false,
@@ -25,6 +17,25 @@ router.get("/api/workouts", (req, res) => {
         error: true,
         data: null,
         message: "Unable to retrieve all workouts.",
+      });
+    });
+});
+
+router.post("/api/workouts", (req, res) => {
+    db.Workout.create({})
+    .then((createWorkouts) => {
+      res.json({
+        error: false,
+        data: createWorkouts,
+        message: "Workout created.",
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: true,
+        data: null,
+        message: "Unable to create workout.",
       });
     });
 });
