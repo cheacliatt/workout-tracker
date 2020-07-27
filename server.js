@@ -37,6 +37,7 @@ app.use(WorkoutController);
 // app.use(HTMLController);
 
 require("./controllers/htmlController")(app);
+// require("./controllers/workoutController")(app);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
