@@ -1,9 +1,8 @@
+
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const WorkoutController = require("./controllers/workoutController");
-// const ExerciseController = require("./controllers/exerciseController");
-const HTMLController = require("./controllers/htmlController");
 
 const PORT = process.env.PORT || 8080;
 
@@ -26,12 +25,9 @@ connection.on("error", (err) => {
   console.log("Mongoose connection error: ", err);
 });
 
+// Routes
 app.use(WorkoutController);
-// app.use(ExerciseController);
-// app.use(HTMLController);
-
 require("./controllers/htmlController")(app);
-// require("./controllers/workoutController")(app);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

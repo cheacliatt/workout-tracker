@@ -1,7 +1,10 @@
+// These are the routes for API's
+
+// Requiring all the good stuff plus our workout model
 const express = require("express");
 const router = express.Router();
 const db = require("../models");
-
+// GET route to view all of our workouts
 router.get("/api/workouts", (req, res) => {
   db.Workout.find({})
     .then((foundWorkouts) => {
@@ -16,7 +19,7 @@ router.get("/api/workouts", (req, res) => {
       });
     });
 });
-
+// This is linked to the stats page to get a range for workout data
 router.get("/api/workouts/range", (req, res) => {
   db.Workout.find({})
     .limit(7)
@@ -32,7 +35,7 @@ router.get("/api/workouts/range", (req, res) => {
       });
     });
 });
-
+// To add workouts
 router.post("/api/workouts", (req, res) => {
   db.Workout.create({})
     .then((createWorkouts) => {
@@ -48,7 +51,7 @@ router.post("/api/workouts", (req, res) => {
       });
     });
 });
-
+// Update existing workouts
 router.put("/api/workouts/:id", (req, res) => {
   console.log(req.params.id);
   console.log(req.body);

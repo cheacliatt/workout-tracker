@@ -1,3 +1,5 @@
+// I set this controller up differently than workoutController, because it didn't want to play well
+// These are essentially the view routes for the html pages to generate
 const path = require("path");
 
 module.exports = function(app) {
