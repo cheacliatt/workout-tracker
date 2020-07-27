@@ -49,7 +49,7 @@ router.put("api/workouts/:id", (req, res) => {
     .then((updateWorkouts) => {
       res.json({
         error: false,
-        data: createWorkouts,
+        data: updateWorkouts,
         message: "Workout updated.",
       });
     })
