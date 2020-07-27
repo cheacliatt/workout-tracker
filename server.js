@@ -7,14 +7,14 @@ const HTMLController = require("./controllers/htmlController");
 
 const PORT = process.env.PORT || 8080;
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }, { useUnifiedTopology: true }));
 app.use(express.json());
 
 app.use(express.static("public"));
 
 mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost/workout",
-  { useNewUrlParser: true, useUnifiedTopology: true }
+  { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }
 );
 const connection = mongoose.connection;
 
@@ -24,12 +24,6 @@ connection.on("connected", () => {
 
 connection.on("error", (err) => {
   console.log("Mongoose connection error: ", err);
-});
-
-app.get("/api/config", (req, res) => {
-  res.json({
-    success: true,
-  });
 });
 
 app.use(WorkoutController);
