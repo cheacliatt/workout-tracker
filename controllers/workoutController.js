@@ -2,15 +2,26 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 
-
 router.get("/api/workouts", (req, res) => {
   db.Workout.find({})
     .then((foundWorkouts) => {
-      res.json({
-        error: false,
-        data: foundWorkouts,
-        message: "All workouts retrieved.",
+      res.json(foundWorkouts);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: true,
+        data: null,
+        message: "Unable to retrieve all workouts.",
       });
+    });
+});
+
+router.get("/api/workouts/range", (req, res) => {
+  db.Workout.find({})
+    .limit(7)
+    .then((foundWorkouts) => {
+      res.json(foundWorkouts);
     })
     .catch((err) => {
       console.log(err);
@@ -25,11 +36,8 @@ router.get("/api/workouts", (req, res) => {
 router.post("/api/workouts", (req, res) => {
   db.Workout.create({})
     .then((createWorkouts) => {
-      res.json({
-        error: false,
-        data: createWorkouts,
-        message: "Workout created.",
-      });
+      console.log(createWorkouts);
+      res.json(createWorkouts);
     })
     .catch((err) => {
       console.log(err);
@@ -41,7 +49,9 @@ router.post("/api/workouts", (req, res) => {
     });
 });
 
-router.put("api/workouts/:id", (req, res) => {
+router.put("/api/workouts/:id", (req, res) => {
+  console.log(req.params.id);
+  console.log(req.body);
   db.Workout.findByIdAndUpdate(
     { _id: req.params.id },
     {
@@ -51,11 +61,8 @@ router.put("api/workouts/:id", (req, res) => {
     { new: true }
   )
     .then((updateWorkouts) => {
-      res.json({
-        error: false,
-        data: updateWorkouts,
-        message: "Workout updated.",
-      });
+      console.log(updateWorkouts);
+      res.json(updateWorkouts);
     })
     .catch((err) => {
       console.log(err);
