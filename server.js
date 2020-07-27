@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const WorkoutController = require("./controllers/workoutController");
-const ExerciseController = require("./controllers/exerciseController");
+// const ExerciseController = require("./controllers/exerciseController");
 const HTMLController = require("./controllers/htmlController");
 
 const PORT = process.env.PORT || 8080;
@@ -33,7 +33,7 @@ app.get("/api/config", (req, res) => {
 });
 
 app.use(WorkoutController);
-app.use(ExerciseController);
+// app.use(ExerciseController);
 // app.use(HTMLController);
 
 require("./controllers/htmlController")(app);
